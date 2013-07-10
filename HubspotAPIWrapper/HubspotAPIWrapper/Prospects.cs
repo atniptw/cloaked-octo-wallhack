@@ -30,12 +30,12 @@ namespace HubspotAPIWrapper
                 parameters["orgOffset"] = orgoffset;
             }
 
-            return this.call("timeline", parameters);
+            return this.Call("timeline", parameters);
         }
 
         object get_company(string company_slug)
         {
-            return this.call(string.Format("timeline/{0}", company_slug));
+            return this.Call(string.Format("timeline/{0}", company_slug));
         }
     }
 }

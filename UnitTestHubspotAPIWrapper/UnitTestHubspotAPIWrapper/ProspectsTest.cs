@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTestHubspotAPIWrapper
 {
     [TestClass]
-    public class UnitTest1
+    public class ProspectsTest
     {
         [TestMethod]
         public void TestMethod1()

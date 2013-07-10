@@ -8,31 +8,51 @@ namespace HubspotAPIWrapper
 {
     public class BaseClass
     {
-        private string api_key;
-        private string access_token;
-        private string refresh_token;
-        private string client_id;
-        private Dictionary<string, object> options;
-        public BaseClass(string api_key=null, string access_token=null, string refresh_token=null, string client_id=null)
+        private readonly string _apiKey;
+        private readonly string _accessToken;
+        private readonly string _refreshToken;
+        private string _clientId;
+        private readonly Dictionary<string, object> _options;
+        public BaseClass(string apiKey=null, string accessToken=null, string refreshToken=null, string clientId=null)
         {
-            this.api_key = api_key;
-            this.access_token = access_token;
-            this.refresh_token = refresh_token;
-            this.client_id = client_id;
+            _apiKey = apiKey;
+            _accessToken = accessToken;
+            _refreshToken = refreshToken;
+            _clientId = clientId;
 
-            if ((this.api_key.Equals(null)) && (this.access_token.Equals(null)))
+            if ((_apiKey != null) && (this._accessToken != null))
             {
                 throw new ArgumentException("Cannot use both api_key and access_token");
             }
-            if ((this.api_key.Equals(null)) & (this.access_token.Equals(null)) && (this.refresh_token.Equals(null)))
+            if ((_apiKey == null) & (_accessToken == null) && (_refreshToken == null))
             {
                 throw new ArgumentException("Missing required credentials");
             }
-            this.options = new Dictionary<string, object>(); //{"api_base": "api.hubapi.com"};
-            this.options["api_base"] = "api.hubapi.com";
+            _options = new Dictionary<string, object>();
+            _options["api_base"] = "api.hubapi.com";
         }
 
-        protected object call(string subpath, Dictionary<string, object> parameters=null)
+        protected object Call(string subpath, Dictionary<string, object> parameters=null, string method="GET", string query="")
+        {
+            var result = this.Callraw(subpath, parameters = parameters, method = method, query = query);
+            return Digestresult(result.body);
+        }
+
+        private object Callraw(string subpath, Dictionary<string, object> parameters, string method, string query)
+        {
+            object url;
+            object headers;
+            object data;
+
+            Preparerequest(out url, out headers, out data, subpath, parameters, query);
+        }
+
+        private void Preparerequest(out object url, out object headers, out object data, string subpath, Dictionary<string, object> parameters, string query)
+        {
+            throw new NotImplementedException();
+        }
+
+        private object Digestresult(object body)
         {
             throw new NotImplementedException();
         }
