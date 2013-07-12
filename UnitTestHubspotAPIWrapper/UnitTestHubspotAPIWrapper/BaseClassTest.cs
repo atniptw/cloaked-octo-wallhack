@@ -1,14 +1,24 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using HubspotAPIWrapper;
 
 namespace UnitTestHubspotAPIWrapper
 {
-    [TestClass]
+    [TestFixture]
     public class BaseClassTest
     {
-        [TestMethod]
-        public void TestMethod1()
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Missing required credentials")]
+        public void BaseClassErrorsWithNoArguments()
         {
+            var expected = new BaseClass();
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Cannot use both api_key and access_token")]
+        public void BaseClassErrorsWhenKeyAndTokenSpecified()
+        {
+            var expected = new BaseClass(apiKey: "demo", accessToken: "demooooo-oooo-oooo-oooo-oooooooooooo");
         }
     }
 }

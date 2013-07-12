@@ -51,7 +51,7 @@ namespace HubspotAPIWrapper
 
         JsonObject GetContactsInAList()
         {
-            throw new NotImplementedException()
+            throw new NotImplementedException();
         }
 
         JsonObject GetRecentlyAddedContactsInAList()

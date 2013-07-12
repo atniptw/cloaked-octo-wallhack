@@ -1,41 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Json;
 
 namespace HubspotAPIWrapper
 {
-    class Prospects : BaseClass
+    public class Prospects : BaseClass
     {
-        private string PROSPECTS_API_VERSION = "v1";
+        private const string ProspectsApiVersion = "v1";
 
-        public string get_path(string method)
+        private string GetPath(string method)
         {
-            return string.Format("prospects/{0}/{1}", PROSPECTS_API_VERSION, method);
+            return string.Format("prospects/{0}/{1}", ProspectsApiVersion, method);
         }
 
-        public object get_prospects(int offset=0, string orgoffset=null, int limit=0)
+        public JsonObject GetProspects(int timeOffset = 0, string orgOffset = "", int limit = 0)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
-
-            if (limit > 0)
-            {
-                parameters["count"] = limit;
-            }
-
-            if (offset > 0)
-            {
-                parameters["timeOffset"] = offset;
-                parameters["orgOffset"] = orgoffset;
-            }
-
-            return this.Call("timeline", parameters);
+            throw new NotImplementedException();
         }
 
-        object get_company(string company_slug)
+        /// <summary>
+        ///     For a given portal, return information about a specific prospect organization in JSON format.
+        /// </summary>
+        /// <param name="organization">
+        ///     The organization you're requesting prospects from.
+        ///     Please Note That if the company that you're looking for contains a space
+        ///     in its name, then you need to replace that space with a dash ("-") character.
+        ///     URL encoding the space (replacing with a "%20" will not work and return
+        ///     404.
+        /// </param>
+        /// <returns></returns>
+        public JsonObject GetProspectInfo(string organization)
         {
-            return this.Call(string.Format("timeline/{0}", company_slug));
+            throw new NotImplementedException();
+        }
+
+        public JsonObject SearchForProspects(string searchType, string query, int timeOffset = 0, string orgOffset = "")
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HideAProspect(string organization)
+        {
+            throw new NotImplementedException();
+        }
+
+        public JsonObject GetHiddenProspect()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnHideAProspect(string organization)
+        {
+            throw new NotImplementedException();
         }
     }
 }
