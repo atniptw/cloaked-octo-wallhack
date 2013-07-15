@@ -2,6 +2,6 @@
 {
     public interface IWebClient
     {
-        string GetResponse();
+        string GetWebResponse(string uri);
     }
 }

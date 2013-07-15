@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using System.Json;
-using System.Web.Script.Serialization;
 
 namespace HubspotAPIWrapper
 {
@@ -14,7 +11,6 @@ namespace HubspotAPIWrapper
         private readonly Dictionary<string, object> _options;
         private readonly string _refreshToken;
         private string _clientId;
-        public IWebClient WebClient { get; set; }
 
         public BaseClass(string apiKey = null, string accessToken = null, string refreshToken = null,
                          string clientId = null)
@@ -36,12 +32,14 @@ namespace HubspotAPIWrapper
             _options["api_base"] = "api.hubapi.com";
         }
 
+        public IWebClient UserWebClient { get; set; }
+
         private void PrepareConnectionType()
         {
             throw new NotImplementedException();
         }
 
-        private string GetPath(string subPath)
+        protected virtual string GetPath(string subPath)
         {
             throw new NotImplementedException();
         }
@@ -52,44 +50,18 @@ namespace HubspotAPIWrapper
             throw new NotImplementedException();
         }
 
-        protected object Call(string subpath, Dictionary<string, object> parameters = null, string method = "GET",
-                              string query = "")
+        protected JsonObject Call(string subpath, Dictionary<string, object> parameters = null, string method = "GET",
+                                  string query = "")
         {
             string result = CallRaw(subpath, parameters = parameters, method = method, query = query);
-            return DigestResult(result);
+            return new JsonObject((JsonValue.Parse(result)));
         }
 
         private string CallRaw(string subpath, Dictionary<string, object> parameters, string method, string query)
         {
-            object url;
-            object headers;
-           
-            var client = new WebClient();
-
-            var data = client.OpenRead("");
-            string response = null;
-            if (data != null)
-            {
-                var reader = new StreamReader(data);
-                response = reader.ReadToEnd();
-            }
-            return response;
-        }
-
-
-
-        private JsonObject DigestResult(string body)
-        {
-            JsonObject data = null;
-            if (body != null)
-            {
-                var serializer = new JavaScriptSerializer();
-                data = serializer.Deserialize<JsonObject>(body);
-            }
-
-            return data;
+            return
+                UserWebClient.GetWebResponse(String.Format("https://{0}/{1}?access_token={2}", _options["api_base"],
+                                                           GetPath(subpath), _accessToken));
         }
     }
-
-
 }

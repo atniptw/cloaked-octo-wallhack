@@ -62,10 +62,8 @@
     <Compile Include="Prospects.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SocialMedia.cs" />
+    <Compile Include="WindowsWebClient.cs" />
     <Compile Include="Workflows.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
