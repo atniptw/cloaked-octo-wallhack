@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Json;
 
 namespace HubspotAPIWrapper
@@ -34,34 +35,24 @@ namespace HubspotAPIWrapper
 
         public IWebClient UserWebClient { get; set; }
 
-        private void PrepareConnectionType()
-        {
-            throw new NotImplementedException();
-        }
-
         protected virtual string GetPath(string subPath)
         {
             throw new NotImplementedException();
         }
 
-        private void Preparerequest(out object url, out object headers, out object data, string subpath,
-                                    Dictionary<string, object> parameters, string query)
-        {
-            throw new NotImplementedException();
-        }
-
         protected JsonObject Call(string subpath, Dictionary<string, object> parameters = null, string method = "GET",
-                                  string query = "")
+                                  string query = "", string data="", string contentType="")
         {
-            string result = CallRaw(subpath, parameters = parameters, method = method, query = query);
-            return new JsonObject((JsonValue.Parse(result)));
-        }
+            string uri = String.Format("https://{0}/{1}?access_token={2}", _options["api_base"],
+                                       GetPath(subpath), _accessToken);
+            if (query.Length > 0)
+            {
+                uri = string.Format("{0}&q={1}", uri, query);
+            }
 
-        private string CallRaw(string subpath, Dictionary<string, object> parameters, string method, string query)
-        {
-            return
-                UserWebClient.GetWebResponse(String.Format("https://{0}/{1}?access_token={2}", _options["api_base"],
-                                                           GetPath(subpath), _accessToken));
+            var returnVal = UserWebClient.UploadString(uri, contentType);
+
+            return new JsonObject(JsonValue.Parse(returnVal));
         }
     }
 }

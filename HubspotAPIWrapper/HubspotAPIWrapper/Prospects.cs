@@ -39,12 +39,12 @@ namespace HubspotAPIWrapper
 
         public JsonObject SearchForProspects(string searchType, string query, int timeOffset = 0, string orgOffset = "")
         {
-            throw new NotImplementedException();
+            return Call(string.Format("search/{0}", searchType), query: query);
         }
 
         public void HideAProspect(string organization)
         {
-            throw new NotImplementedException();
+            Call("filters", data: string.Format("organization={0}", organization), method: "POST", contentType: "application/x-www-form-urlencoded");
         }
 
         public JsonObject GetHiddenProspect()
