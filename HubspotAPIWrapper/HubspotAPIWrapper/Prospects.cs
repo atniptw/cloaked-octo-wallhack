@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Json;
 
 namespace HubspotAPIWrapper
@@ -17,9 +19,20 @@ namespace HubspotAPIWrapper
             return string.Format("prospects/{0}/{1}", ProspectsApiVersion, method);
         }
 
-        public JsonObject GetProspects(int timeOffset = 0, string orgOffset = "", int limit = 0)
+        public JsonObject GetProspects(string timeOffset = "", string orgOffset = "")
         {
-            return Call("timeline");
+            if ((timeOffset.Length > 0 && orgOffset.Length <= 0) || (orgOffset.Length > 0 && timeOffset.Length <= 0))
+            {
+                throw new ArgumentException("Need both Time Offset and Organization Offset");
+            }
+
+            var optionalParams = new Dictionary<string, string>();
+            if (timeOffset.Length > 0 && orgOffset.Length > 0)
+            {
+                optionalParams["timeOffset"] = timeOffset;
+                optionalParams["orgOffset"] = orgOffset;
+            }
+            return Call("timeline", optionalParams: optionalParams);
         }
 
         /// <summary>
@@ -29,7 +42,7 @@ namespace HubspotAPIWrapper
         ///     The organization you're requesting prospects from.
         ///     Please Note That if the company that you're looking for contains a space
         ///     in its name, then you need to replace that space with a dash ("-") character.
-        ///     URL encoding the space (replacing with a "%20" will not work and return 404.
+        ///     URL encoding the space (replacing with a "%20" will not work and return 404).
         /// </param>
         /// <returns></returns>
         public JsonObject GetProspectInfo(string organization)
@@ -44,17 +57,17 @@ namespace HubspotAPIWrapper
 
         public void HideAProspect(string organization)
         {
-            Call("filters", method: "POST", contentType: "application/x-www-form-urlencoded");
+            Call("filters", method: "POST", contentType: "application/x-www-form-urlencoded", data: organization);
         }
 
         public JsonObject GetHiddenProspect()
         {
-            throw new NotImplementedException();
+            return Call("filters");
         }
 
         public void UnHideAProspect(string organization)
         {
-            throw new NotImplementedException();
+            Call("filters", method: "DELETE", contentType: "application/x-www-form-urlencoded", data: organization);
         }
     }
 }

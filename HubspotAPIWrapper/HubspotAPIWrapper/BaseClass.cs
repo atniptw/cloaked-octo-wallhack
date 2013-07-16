@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Json;
+using System.Linq;
+using Microsoft.Security.Application;
 
 namespace HubspotAPIWrapper
 {
@@ -11,7 +13,6 @@ namespace HubspotAPIWrapper
         private readonly string _apiKey;
         private readonly Dictionary<string, object> _options;
         private readonly string _refreshToken;
-        private string _clientId;
 
         public BaseClass(string apiKey = null, string accessToken = null, string refreshToken = null,
                          string clientId = null)
@@ -19,7 +20,7 @@ namespace HubspotAPIWrapper
             if (apiKey != null) _apiKey = apiKey;
             if (accessToken != null) _accessToken = accessToken;
             if (refreshToken != null) _refreshToken = refreshToken;
-            if (clientId != null) _clientId = clientId;
+            if (clientId != null) ;
 
             if (_apiKey != null && _accessToken != null)
             {
@@ -40,26 +41,39 @@ namespace HubspotAPIWrapper
             throw new NotImplementedException();
         }
 
-        protected JsonObject Call(string subpath, string method = "GET", string query = "", string contentType="")
+        protected JsonObject Call(string subpath, string method = "GET", string query = "", string contentType = "",
+                                  string data = "", Dictionary<string, string> optionalParams = null)
         {
             string uri = String.Format("https://{0}/{1}?access_token={2}", _options["api_base"],
                                        GetPath(subpath), _accessToken);
+            string body = string.Empty;
+            if (data.Length > 0)
+            {
+                body = Encoder.UrlEncode(data);
+            }
             if (query.Length > 0)
             {
                 uri = string.Format("{0}&q={1}", uri, query);
             }
 
-            Debug.WriteLine(uri);
-            var returnVal = UserWebClient.UploadString(uri, method: method, contentType: contentType);
+            if (optionalParams != null)
+            {
+                uri = optionalParams.Aggregate(uri, (current, optionalParam) => string.Format("{0}&{1}={2}", current, optionalParam.Key, optionalParam.Value));
+            }
+
+            Debug.WriteLine(body);
+
+            string returnVal = UserWebClient.UploadString(uri, method: method, contentType: contentType, data: body);
 
             if (returnVal != null)
             {
-                return new JsonObject(JsonValue.Parse(returnVal));
+                if (returnVal.Length > 0)
+                {
+                    return new JsonObject(JsonValue.Parse(returnVal));
+                }
             }
-            else
-            {
-                return new JsonObject();
-            }
+
+            return new JsonObject();
         }
     }
 }
