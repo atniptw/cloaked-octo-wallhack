@@ -88,7 +88,8 @@ namespace UnitTestHubspotAPIWrapper
                 x =>
                 x.UploadString(
                     string.Format(
-                        "https://api.hubapi.com/prospects/v1/filters?access_token=demooooo-oooo-oooo-oooo-oooooooooooo&organization=marriott")))
+                        "https://api.hubapi.com/prospects/v1/filters?access_token=demooooo-oooo-oooo-oooo-oooooooooooo&organization=marriott"),
+                    method: "POST", contentType: "application/x-www-form-urlencoded"))
                           .Return(data);
 
 
@@ -98,7 +99,6 @@ namespace UnitTestHubspotAPIWrapper
                 };
             target.HideAProspect("marriott");
             mockDataSource.VerifyAllExpectations();
-
         }
 
         [Test]

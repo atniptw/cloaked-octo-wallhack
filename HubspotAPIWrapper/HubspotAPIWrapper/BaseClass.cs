@@ -40,8 +40,7 @@ namespace HubspotAPIWrapper
             throw new NotImplementedException();
         }
 
-        protected JsonObject Call(string subpath, Dictionary<string, object> parameters = null, string method = "GET",
-                                  string query = "", string data="", string contentType="")
+        protected JsonObject Call(string subpath, string method = "GET", string query = "", string contentType="")
         {
             string uri = String.Format("https://{0}/{1}?access_token={2}", _options["api_base"],
                                        GetPath(subpath), _accessToken);
@@ -50,9 +49,17 @@ namespace HubspotAPIWrapper
                 uri = string.Format("{0}&q={1}", uri, query);
             }
 
-            var returnVal = UserWebClient.UploadString(uri, contentType);
+            Debug.WriteLine(uri);
+            var returnVal = UserWebClient.UploadString(uri, method: method, contentType: contentType);
 
-            return new JsonObject(JsonValue.Parse(returnVal));
+            if (returnVal != null)
+            {
+                return new JsonObject(JsonValue.Parse(returnVal));
+            }
+            else
+            {
+                return new JsonObject();
+            }
         }
     }
 }

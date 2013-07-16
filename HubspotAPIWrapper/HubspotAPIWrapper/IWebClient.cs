@@ -2,6 +2,6 @@
 {
     public interface IWebClient
     {
-        string UploadString(string uri, string method = "", string data = "", string contentType = "");
+        string UploadString(string uri, string method = "", string contentType = "");
     }
 }

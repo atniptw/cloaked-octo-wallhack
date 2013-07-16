@@ -44,7 +44,7 @@ namespace HubspotAPIWrapper
 
         public void HideAProspect(string organization)
         {
-            Call("filters", data: string.Format("organization={0}", organization), method: "POST", contentType: "application/x-www-form-urlencoded");
+            Call("filters", method: "POST", contentType: "application/x-www-form-urlencoded");
         }
 
         public JsonObject GetHiddenProspect()
