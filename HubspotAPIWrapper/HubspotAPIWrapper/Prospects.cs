@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Json;
 
 namespace HubspotAPIWrapper
 {
-    public class Prospects : BaseClass
+    public class Prospects : BaseClass, IProspects
     {
         private const string ProspectsApiVersion = "v1";
 

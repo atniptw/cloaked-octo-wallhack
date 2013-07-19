@@ -61,6 +61,8 @@
     <Compile Include="EmailEvents.cs" />
     <Compile Include="EnterpriseEvents.cs" />
     <Compile Include="Forms.cs" />
+    <Compile Include="IBaseClass.cs" />
+    <Compile Include="IProspects.cs" />
     <Compile Include="IWebClient.cs" />
     <Compile Include="Keywords.cs" />
     <Compile Include="OAuth.cs" />

@@ -7,7 +7,7 @@ using Microsoft.Security.Application;
 
 namespace HubspotAPIWrapper
 {
-    public class BaseClass
+    public class BaseClass : IBaseClass
     {
         private readonly string _accessToken;
         private readonly string _apiKey;
@@ -44,9 +44,19 @@ namespace HubspotAPIWrapper
         protected JsonObject Call(string subpath, string method = "GET", string query = "", string contentType = "",
                                   string data = "", Dictionary<string, string> optionalParams = null)
         {
-            string uri = String.Format("https://{0}/{1}?access_token={2}", _options["api_base"],
-                                       GetPath(subpath), _accessToken);
-            string body = string.Empty;
+            string uri;
+            
+            if (_accessToken != null)
+            {
+                uri = String.Format("https://{0}/{1}?access_token={2}", _options["api_base"],
+                                GetPath(subpath), _accessToken);
+            }
+            else
+            {
+                uri = String.Format("https://{0}/{1}?api_key={2}", _options["api_base"],
+                                    GetPath(subpath), _apiKey);
+            }
+            var body = string.Empty;
             if (data.Length > 0)
             {
                 body = Encoder.UrlEncode(data);
