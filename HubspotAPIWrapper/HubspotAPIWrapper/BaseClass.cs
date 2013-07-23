@@ -71,8 +71,6 @@ namespace HubspotAPIWrapper
                 uri = optionalParams.Aggregate(uri, (current, optionalParam) => string.Format("{0}&{1}={2}", current, optionalParam.Key, optionalParam.Value));
             }
 
-            Debug.WriteLine(body);
-
             string returnVal = UserWebClient.UploadString(uri, method: method, contentType: contentType, data: body);
 
             if (returnVal != null)
