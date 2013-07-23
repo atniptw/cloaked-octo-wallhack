@@ -49,7 +49,7 @@ namespace HubspotAPIWrapper
             return Call(string.Format("timeline/{0}", organization));
         }
 
-        public JsonObject SearchForProspects(string searchType, string query, int timeOffset = 0, string orgOffset = "")
+        public JsonObject SearchForProspects(string searchType, string query, string timeOffset = "", string orgOffset = "")
         {
             return Call(string.Format("search/{0}", searchType), query: query);
         }

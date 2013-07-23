@@ -20,7 +20,7 @@ namespace HubspotAPIWrapper
             if (apiKey != null) _apiKey = apiKey;
             if (accessToken != null) _accessToken = accessToken;
             if (refreshToken != null) _refreshToken = refreshToken;
-            if (clientId != null) ;
+            
 
             if (_apiKey != null && _accessToken != null)
             {

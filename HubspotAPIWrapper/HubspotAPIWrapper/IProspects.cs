@@ -11,7 +11,7 @@ namespace HubspotAPIWrapper
     {
         JsonObject GetProspects(string timeOffset = "", string orgOffset = "");
         JsonObject GetProspectInfo(string organization);
-        JsonObject SearchForProspects(string searchType, string query, int timeOffset = 0, string orgOffset = "");
+        JsonObject SearchForProspects(string searchType, string query, string timeOffset = "", string orgOffset = "");
         void HideAProspect(string organization);
         JsonObject GetHiddenProspect();
         void UnHideAProspect(string organization);
