@@ -20,7 +20,7 @@ namespace HubspotAPIWrapper
             if (apiKey != null) _apiKey = apiKey;
             if (accessToken != null) _accessToken = accessToken;
             if (refreshToken != null) _refreshToken = refreshToken;
-            
+
 
             if (_apiKey != null && _accessToken != null)
             {
@@ -32,6 +32,7 @@ namespace HubspotAPIWrapper
             }
             _options = new Dictionary<string, object>();
             _options["api_base"] = "api.hubapi.com";
+            UserWebClient = new WindowsWebClient();
         }
 
         public IWebClient UserWebClient { get; set; }
@@ -45,18 +46,18 @@ namespace HubspotAPIWrapper
                                   string data = "", Dictionary<string, string> optionalParams = null)
         {
             string uri;
-            
+
             if (_accessToken != null)
             {
                 uri = String.Format("https://{0}/{1}?access_token={2}", _options["api_base"],
-                                GetPath(subpath), _accessToken);
+                                    GetPath(subpath), _accessToken);
             }
             else
             {
-                uri = String.Format("https://{0}/{1}?api_key={2}", _options["api_base"],
+                uri = String.Format("https://{0}/{1}?hapikey={2}", _options["api_base"],
                                     GetPath(subpath), _apiKey);
             }
-            var body = string.Empty;
+            string body = string.Empty;
             if (data.Length > 0)
             {
                 body = Encoder.UrlEncode(data);
@@ -68,7 +69,10 @@ namespace HubspotAPIWrapper
 
             if (optionalParams != null)
             {
-                uri = optionalParams.Aggregate(uri, (current, optionalParam) => string.Format("{0}&{1}={2}", current, optionalParam.Key, optionalParam.Value));
+                uri = optionalParams.Aggregate(uri,
+                                               (current, optionalParam) =>
+                                               string.Format("{0}&{1}={2}", current, optionalParam.Key,
+                                                             optionalParam.Value));
             }
 
             string returnVal = UserWebClient.UploadString(uri, method: method, contentType: contentType, data: body);
