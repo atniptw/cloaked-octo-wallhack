@@ -7,56 +7,35 @@ using System.Json;
 
 namespace HubspotAPIWrapper
 {
-    class Contacts : BaseClass
+    public class Contacts : BaseClass
     {
-        JsonObject CreateAContact()
+        protected object ProspectsApiVersion = "v1";
+
+        public Contacts(string apiKey = null, string accessToken = null, string refreshToken = null,
+                 string clientId = null) : base(apiKey, accessToken, refreshToken, clientId)
         {
-            throw new NotImplementedException();
         }
 
-        JsonObject UpdateAContact()
+        protected override string GetPath(string method)
         {
-            throw new NotImplementedException();
+            return string.Format("contacts/{0}/{1}", ProspectsApiVersion, method);
         }
 
-        JsonObject DeleteAContact()
+        public JsonObject CreateNewContact(string contact)
         {
-            throw new NotImplementedException();
+            return Call(subpath: "contact", method: "POST", contentType: "application/json", data: contact);
         }
 
-        JsonObject GetAllContacts()
+        public void UpdateExistingContact(string contactId, string data)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("contact/vid/{0}/profile", contactId);
+            Call(subpath: subpath, method: "POST", contentType: "application/json", data: data);
         }
 
-        JsonObject GetRecentContacts()
+        public void ArchiveContact(string contactId)
         {
-            throw new NotImplementedException();
-        }
-
-        JsonObject GetContactById()
-        {
-            throw new NotImplementedException();
-        }
-
-        JsonObject GetContactByEmail()
-        {
-            throw new NotImplementedException();
-        }
-
-        JsonObject GetContactByUserToken()
-        {
-            throw new NotImplementedException();
-        }
-
-        JsonObject SearchForContacs()
-        {
-            throw new NotImplementedException();
-        }
-
-        JsonObject GetContactStatistics()
-        {
-            throw new NotImplementedException();
+            var subpath = string.Format("contact/vid/{0}", contactId);
+            Call(subpath: subpath, method: "DELETE");
         }
     }
 }

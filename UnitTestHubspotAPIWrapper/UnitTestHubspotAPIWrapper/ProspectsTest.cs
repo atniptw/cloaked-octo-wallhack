@@ -3,6 +3,7 @@ using System.Json;
 using HubspotAPIWrapper;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Microsoft.Security.Application;
 
 namespace UnitTestHubspotAPIWrapper
 {
@@ -13,7 +14,7 @@ namespace UnitTestHubspotAPIWrapper
         public void ProspectGetHiddenProspectUrlFormedCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            string expectedUrl = Constants.ListHiddenProspectsUrl;
+            var expectedUrl = Constants.ListHiddenProspectsUrl;
 
             // Arrange
             mockDataSource
@@ -47,8 +48,8 @@ namespace UnitTestHubspotAPIWrapper
         public void ProspectGetProspectsWithOffsetUrlFormedCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            string data = Constants.GetProspectsResponse;
-            string expectedUrl = Constants.GetProspectWithTimeOffsetUrl;
+            var data = Constants.GetProspectsResponse;
+            var expectedUrl = Constants.GetProspectWithTimeOffsetUrl;
 
             // Arrange
             mockDataSource
@@ -130,7 +131,7 @@ namespace UnitTestHubspotAPIWrapper
         [Test]
         public void ProspectsClassInitializes()
         {
-            var target = new BaseClass(apiKey: Constants.ApiKey);
+            var target = new Prospects(apiKey: Constants.ApiKey);
             Assert.IsNotNull(target);
         }
 
@@ -138,8 +139,8 @@ namespace UnitTestHubspotAPIWrapper
         public void ProspectsGetProspectInfoRequestIsFormedCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            string data = Constants.GetProspectInfoResponse;
-            string expectedUrl = Constants.GetProspectInfoUrl;
+            var data = Constants.GetProspectInfoResponse;
+            var expectedUrl = Constants.GetProspectInfoUrl;
 
             // Arrange
             mockDataSource
@@ -172,8 +173,8 @@ namespace UnitTestHubspotAPIWrapper
         public void ProspectsGetProspectsRequestIsFormedCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            string data = Constants.GetProspectsResponse;
-            string expectedUrl = Constants.GetProspectUrl;
+            var data = Constants.GetProspectsResponse;
+            var expectedUrl = Constants.GetProspectUrl;
 
             // Arrange
             mockDataSource
@@ -206,7 +207,7 @@ namespace UnitTestHubspotAPIWrapper
         public void ProspectsGetProspectsUrlPassesDataBackCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            string data = Constants.GetProspectsResponse;
+            var data = Constants.GetProspectsResponse;
 
 
             // Arrange
@@ -239,7 +240,7 @@ namespace UnitTestHubspotAPIWrapper
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
             const string data = "";
-            string expectedUrl = Constants.UnHideAProspectUrl;
+            var expectedUrl = Constants.UnHideAProspectUrl;
 
 
             // Arrange
@@ -258,7 +259,7 @@ namespace UnitTestHubspotAPIWrapper
                     UserWebClient = mockDataSource
                 };
 
-            target.HideAProspect(Constants.ProspectOrganization);
+            target.HideAProspect(Encoder.UrlEncode(Constants.ProspectOrganization));
 
             // Assert
             mockDataSource.AssertWasCalled(c => c.UploadString(
@@ -272,8 +273,8 @@ namespace UnitTestHubspotAPIWrapper
         public void ProspectsSearchForProspectsRequestIsFormedCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            string data = Constants.SearchForProspectsResponse;
-            string expectedUrl = Constants.SearchForProspectsUrl;
+            var data = Constants.SearchForProspectsResponse;
+            var expectedUrl = Constants.SearchForProspectsUrl;
 
             // Arrange
             mockDataSource

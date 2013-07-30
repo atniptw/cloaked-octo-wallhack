@@ -42,7 +42,7 @@ namespace HubspotAPIWrapper
             throw new NotImplementedException();
         }
 
-        protected JsonObject Call(string subpath, string method = "GET", string query = "", string contentType = "",
+        protected JsonObject Call(string subpath, string method = "GET", string query = "", string contentType = "application/text",
                                   string data = "", Dictionary<string, string> optionalParams = null)
         {
             string uri;
@@ -57,11 +57,7 @@ namespace HubspotAPIWrapper
                 uri = String.Format("https://{0}/{1}?hapikey={2}", _options["api_base"],
                                     GetPath(subpath), _apiKey);
             }
-            string body = string.Empty;
-            if (data.Length > 0)
-            {
-                body = Encoder.UrlEncode(data);
-            }
+
             if (query.Length > 0)
             {
                 uri = string.Format("{0}&q={1}", uri, query);
@@ -75,7 +71,7 @@ namespace HubspotAPIWrapper
                                                              optionalParam.Value));
             }
 
-            string returnVal = UserWebClient.UploadString(uri, method: method, contentType: contentType, data: body);
+            var returnVal = UserWebClient.UploadString(uri, method: method, contentType: contentType, data: data);
 
             if (returnVal != null)
             {
