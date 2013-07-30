@@ -37,5 +37,24 @@ namespace HubspotAPIWrapper
             var subpath = string.Format("contact/vid/{0}", contactId);
             Call(subpath: subpath, method: "DELETE");
         }
+
+        public JsonObject GetAllContacts(string count = "", string property = "", string contactOffset = "")
+        {
+            var optionalParams = new Dictionary<string, string>();
+            if (count.Length > 0)
+            {
+                optionalParams["count"] = count;
+            }
+            if (property.Length > 0)
+            {
+                optionalParams["property"] = property;
+            }
+            if (count.Length > 0)
+            {
+                optionalParams["vidOffset"] = contactOffset;
+            }
+
+            return Call(subpath: "lists/all/contacts/all", optionalParams: optionalParams);
+        }
     }
 }

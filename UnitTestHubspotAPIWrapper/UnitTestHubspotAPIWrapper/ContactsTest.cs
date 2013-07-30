@@ -144,7 +144,7 @@ namespace UnitTestHubspotAPIWrapper
         public void ContactsUpdateExistingContactRequestFormedCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            string expectedUrl = Constants.UpdateExistingContact;
+            string expectedUrl = Constants.UpdateExistingContactUrl;
 
             // Arrange
             mockDataSource
@@ -176,7 +176,7 @@ namespace UnitTestHubspotAPIWrapper
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
             string data = Constants.CreateNewContactResponse;
-            string expectedUrl = Constants.UpdateExistingContact;
+            string expectedUrl = Constants.UpdateExistingContactUrl;
 
             // Arrange
             mockDataSource
@@ -194,6 +194,38 @@ namespace UnitTestHubspotAPIWrapper
                     UserWebClient = mockDataSource
                 };
             target.UpdateExistingContact("61571", Constants.CreateNewContactBody);
+
+            // Assert
+            mockDataSource.AssertWasCalled(c => c.UploadString(
+                uri: Arg<string>.Matches(actualUrl => actualUrl == expectedUrl),
+                method: Arg<string>.Is.Anything,
+                contentType: Arg<string>.Is.Anything,
+                data: Arg<string>.Is.Anything));
+        }
+
+        [Test]
+        public void ContactsGetAllContactsUrlFormedCorrectly()
+        {
+            var mockDataSource = MockRepository.GenerateMock<IWebClient>();
+            string data = Constants.CreateGetAllContactsResponse;
+            string expectedUrl = Constants.GetAllContactsUrl;
+
+            // Arrange
+            mockDataSource
+                .Stub(x => x.UploadString(
+                    Arg<string>.Is.Anything, // uri
+                    Arg<string>.Is.Anything, // method
+                    Arg<string>.Is.Anything, // content-type
+                    Arg<string>.Is.Anything // data
+                               ))
+                .Return(data);
+
+            // Act
+            var target = new Contacts(apiKey: Constants.ApiKey)
+            {
+                UserWebClient = mockDataSource
+            };
+            target.GetAllContacts();
 
             // Assert
             mockDataSource.AssertWasCalled(c => c.UploadString(
