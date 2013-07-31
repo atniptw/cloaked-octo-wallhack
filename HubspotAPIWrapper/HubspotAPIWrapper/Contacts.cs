@@ -56,5 +56,42 @@ namespace HubspotAPIWrapper
 
             return Call(subpath: "lists/all/contacts/all", optionalParams: optionalParams);
         }
+
+        public JsonObject GetRecentlyUpdatedContacts(string count = "", string timeOffset = "", string contactOffset = "")
+        {
+            var optionalParams = new Dictionary<string, string>();
+            if (count.Length > 0)
+            {
+                optionalParams["count"] = count;
+            }
+            if (timeOffset.Length > 0)
+            {
+                optionalParams["timeOffset"] = timeOffset;
+            }
+            if (count.Length > 0)
+            {
+                optionalParams["vidOffset"] = contactOffset;
+            }
+
+            return Call(subpath: "lists/recently_updated/contacts/recent", optionalParams: optionalParams);
+        }
+
+        public JsonObject GetContactById(string contactId)
+        {
+            var subPath = string.Format("contact/vid/{0}/profile", contactId);
+            return Call(subpath: subPath);
+        }
+
+        public JsonObject GetContactByEmailAddress(string emailAddress)
+        {
+            var subPath = string.Format("contact/email/{0}/profile", emailAddress);
+            return Call(subpath: subPath);
+        }
+
+        public JsonObject GetContactByUserToken(string token)
+        {
+            var subPath = string.Format("contact/utk/{0}/profile", token);
+            return Call(subpath: subPath);
+        }
     }
 }

@@ -70,7 +70,7 @@ namespace HubspotAPIWrapper
                                                string.Format("{0}&{1}={2}", current, optionalParam.Key,
                                                              optionalParam.Value));
             }
-
+            Debug.WriteLine(uri);
             var returnVal = UserWebClient.UploadString(uri, method: method, contentType: contentType, data: data);
 
             if (returnVal != null)

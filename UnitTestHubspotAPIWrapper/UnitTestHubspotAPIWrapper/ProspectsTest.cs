@@ -24,7 +24,7 @@ namespace UnitTestHubspotAPIWrapper
                     Arg<string>.Is.Anything, // content-type
                     Arg<string>.Is.Anything // data
                                ))
-                .Return(Constants.ListHiddenProspects);
+                .Return(string.Empty);
 
             // Act
             var target = new Prospects(accessToken: Constants.AccessToken)
@@ -48,7 +48,6 @@ namespace UnitTestHubspotAPIWrapper
         public void ProspectGetProspectsWithOffsetUrlFormedCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            var data = Constants.GetProspectsResponse;
             var expectedUrl = Constants.GetProspectWithTimeOffsetUrl;
 
             // Arrange
@@ -59,7 +58,7 @@ namespace UnitTestHubspotAPIWrapper
                     Arg<string>.Is.Anything, // content-type
                     Arg<string>.Is.Anything // data
                                ))
-                .Return(data);
+                .Return(string.Empty);
 
             // Act
             var target = new Prospects(accessToken: Constants.AccessToken)
@@ -139,7 +138,6 @@ namespace UnitTestHubspotAPIWrapper
         public void ProspectsGetProspectInfoRequestIsFormedCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            var data = Constants.GetProspectInfoResponse;
             var expectedUrl = Constants.GetProspectInfoUrl;
 
             // Arrange
@@ -150,7 +148,7 @@ namespace UnitTestHubspotAPIWrapper
                     Arg<string>.Is.Anything, // content-type
                     Arg<string>.Is.Anything // data
                                ))
-                .Return(data);
+                .Return(string.Empty);
 
 
             // Act
@@ -173,7 +171,6 @@ namespace UnitTestHubspotAPIWrapper
         public void ProspectsGetProspectsRequestIsFormedCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            var data = Constants.GetProspectsResponse;
             var expectedUrl = Constants.GetProspectUrl;
 
             // Arrange
@@ -184,7 +181,7 @@ namespace UnitTestHubspotAPIWrapper
                     Arg<string>.Is.Anything, // content-type
                     Arg<string>.Is.Anything // data
                                ))
-                .Return(data);
+                .Return(string.Empty);
 
 
             // Act
@@ -201,37 +198,6 @@ namespace UnitTestHubspotAPIWrapper
                 Arg<string>.Is.Anything,
                 Arg<string>.Is.Anything,
                 Arg<string>.Is.Anything));
-        }
-
-        [Test]
-        public void ProspectsGetProspectsUrlPassesDataBackCorrectly()
-        {
-            var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            var data = Constants.GetProspectsResponse;
-
-
-            // Arrange
-            mockDataSource
-                .Stub(x => x.UploadString(
-                    Arg<string>.Is.Anything, // uri
-                    Arg<string>.Is.Anything, // method
-                    Arg<string>.Is.Anything, // content-type
-                    Arg<string>.Is.Anything // data
-                               ))
-                .Return(data);
-
-
-            // Act
-            var target = new Prospects(accessToken: Constants.AccessToken)
-                {
-                    UserWebClient = mockDataSource
-                };
-            JsonObject result = target.GetProspects();
-
-
-            // Assert
-            Assert.AreEqual(250, (int) result["prospects"][0]["page-views"]);
-            Assert.AreEqual("PRIVATE IP ADDRESS LAN", (string) result["prospects"][0]["organization"]);
         }
 
         [Test]
@@ -273,7 +239,6 @@ namespace UnitTestHubspotAPIWrapper
         public void ProspectsSearchForProspectsRequestIsFormedCorrectly()
         {
             var mockDataSource = MockRepository.GenerateMock<IWebClient>();
-            var data = Constants.SearchForProspectsResponse;
             var expectedUrl = Constants.SearchForProspectsUrl;
 
             // Arrange
@@ -284,7 +249,7 @@ namespace UnitTestHubspotAPIWrapper
                     Arg<string>.Is.Anything, // content-type
                     Arg<string>.Is.Anything // data
                                ))
-                .Return(data);
+                .Return(string.Empty);
 
 
             // Act
