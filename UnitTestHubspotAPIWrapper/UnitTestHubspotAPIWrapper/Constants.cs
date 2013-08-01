@@ -48,5 +48,7 @@
 
         public static string GetContactByEmailAddressUrl = "https://api.hubapi.com/contacts/v1/contact/email/testingapis@hubspot.com/profile?hapikey=demo";
         public static string GetContactByUserTokenUrl = "https://api.hubapi.com/contacts/v1/contact/utk/f844d2217850188692f2610c717c2e9b/profile?hapikey=demo";
+        public static string SearchContactsUrl = "https://api.hubapi.com/contacts/v1/search/query?hapikey=demo&q=example";
+        public static string GetContactStatisticsUrl = "https://api.hubapi.com/contacts/v1/contacts/statistics?hapikey=demo";
     }
 }

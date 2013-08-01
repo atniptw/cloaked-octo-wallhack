@@ -93,5 +93,24 @@ namespace HubspotAPIWrapper
             var subPath = string.Format("contact/utk/{0}/profile", token);
             return Call(subpath: subPath);
         }
+
+        public JsonObject SearchContacts(string query, string count = "", string offset = "")
+        {
+            var optionalParams = new Dictionary<string, string>();
+            if (count.Length > 0)
+            {
+                optionalParams["count"] = count;
+            }
+            if (offset.Length > 0)
+            {
+                optionalParams["offset"] = offset;
+            }
+            return Call(subpath: "search/query", query: query, optionalParams: optionalParams);
+        }
+
+        public JsonObject GetContactStatistics()
+        {
+            return Call(subpath: "contacts/statistics");
+        }
     }
 }

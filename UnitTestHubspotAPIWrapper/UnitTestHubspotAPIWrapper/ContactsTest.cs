@@ -352,5 +352,67 @@ namespace UnitTestHubspotAPIWrapper
                 contentType: Arg<string>.Is.Anything,
                 data: Arg<string>.Is.Anything));
         }
+
+        [Test]
+        public void ContactsSearchContactsUrlFormedCorrectly()
+        {
+            var mockDataSource = MockRepository.GenerateMock<IWebClient>();
+            var expectedUrl = Constants.SearchContactsUrl;
+
+            // Arrange
+            mockDataSource
+                .Stub(x => x.UploadString(
+                    Arg<string>.Is.Anything, // uri
+                    Arg<string>.Is.Anything, // method
+                    Arg<string>.Is.Anything, // content-type
+                    Arg<string>.Is.Anything  // data
+                               ))
+                .Return(string.Empty);
+
+            // Act
+            var target = new Contacts(apiKey: Constants.ApiKey)
+            {
+                UserWebClient = mockDataSource
+            };
+            target.SearchContacts("example");
+
+            // Assert
+            mockDataSource.AssertWasCalled(c => c.UploadString(
+                uri: Arg<string>.Matches(actualUrl => actualUrl == expectedUrl),
+                method: Arg<string>.Is.Anything,
+                contentType: Arg<string>.Is.Anything,
+                data: Arg<string>.Is.Anything));
+        }
+
+        [Test]
+        public void ContactsGetContactStatisticsUrlFormedCorrectly()
+        {
+            var mockDataSource = MockRepository.GenerateMock<IWebClient>();
+            var expectedUrl = Constants.GetContactStatisticsUrl;
+
+            // Arrange
+            mockDataSource
+                .Stub(x => x.UploadString(
+                    Arg<string>.Is.Anything, // uri
+                    Arg<string>.Is.Anything, // method
+                    Arg<string>.Is.Anything, // content-type
+                    Arg<string>.Is.Anything  // data
+                               ))
+                .Return(string.Empty);
+
+            // Act
+            var target = new Contacts(apiKey: Constants.ApiKey)
+            {
+                UserWebClient = mockDataSource
+            };
+            target.GetContactStatistics();
+
+            // Assert
+            mockDataSource.AssertWasCalled(c => c.UploadString(
+                uri: Arg<string>.Matches(actualUrl => actualUrl == expectedUrl),
+                method: Arg<string>.Is.Anything,
+                contentType: Arg<string>.Is.Anything,
+                data: Arg<string>.Is.Anything));
+        }
     }
 }
