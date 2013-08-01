@@ -43,7 +43,7 @@ namespace HubspotAPIWrapper
         }
 
         protected JsonObject Call(string subpath, string method = "GET", string query = "", string contentType = "application/text",
-                                  string data = "", Dictionary<string, string> optionalParams = null)
+                                  string data = "", Dictionary<string, string> optionalParams = null, string other = "")
         {
             string uri;
 
@@ -61,6 +61,11 @@ namespace HubspotAPIWrapper
             if (query.Length > 0)
             {
                 uri = string.Format("{0}&q={1}", uri, query);
+            }
+
+            if (other.Length > 0)
+            {
+                uri = string.Format("{0}&{1}", uri, other);
             }
 
             if (optionalParams != null)

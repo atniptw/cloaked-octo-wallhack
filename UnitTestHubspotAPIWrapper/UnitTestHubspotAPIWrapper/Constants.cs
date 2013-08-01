@@ -46,9 +46,25 @@
         public static string GetContactByIdUrl =
             "https://api.hubapi.com/contacts/v1/contact/vid/61571/profile?hapikey=demo";
 
-        public static string GetContactByEmailAddressUrl = "https://api.hubapi.com/contacts/v1/contact/email/testingapis@hubspot.com/profile?hapikey=demo";
-        public static string GetContactByUserTokenUrl = "https://api.hubapi.com/contacts/v1/contact/utk/f844d2217850188692f2610c717c2e9b/profile?hapikey=demo";
-        public static string SearchContactsUrl = "https://api.hubapi.com/contacts/v1/search/query?hapikey=demo&q=example";
-        public static string GetContactStatisticsUrl = "https://api.hubapi.com/contacts/v1/contacts/statistics?hapikey=demo";
+        public static string GetContactByEmailAddressUrl =
+            "https://api.hubapi.com/contacts/v1/contact/email/testingapis@hubspot.com/profile?hapikey=demo";
+
+        public static string GetContactByUserTokenUrl =
+            "https://api.hubapi.com/contacts/v1/contact/utk/f844d2217850188692f2610c717c2e9b/profile?hapikey=demo";
+
+        public static string SearchContactsUrl =
+            "https://api.hubapi.com/contacts/v1/search/query?hapikey=demo&q=example";
+
+        public static string GetContactStatisticsUrl =
+            "https://api.hubapi.com/contacts/v1/contacts/statistics?hapikey=demo";
+
+        public static string CreateNewContactListUrl = "https://api.hubapi.com/contacts/v1/lists?hapikey=demo";
+        public static string UpdateContactListUrl = "https://api.hubapi.com/contacts/v1/lists/2?hapikey=demo";
+        public static string DeleteContactListUrl = "https://api.hubapi.com/contacts/v1/lists/2?hapikey=demo";
+        public static string GetContactListByIdtUrl = "https://api.hubapi.com/contacts/v1/lists/2?hapikey=demo";
+        public static string GetContactListstUrl = "https://api.hubapi.com/contacts/v1/lists?hapikey=demo";
+        public static string GetBatchContactListstUrl = "https://api.hubapi.com/contacts/v1/lists/batch?hapikey=demo&listId=2&listId=3&listId=4&listId=5&";
+        public static string GetStaticContactListstUrl = "https://api.hubapi.com/contacts/v1/lists/static?hapikey=demo";
+        public static string GetDynamicContactListstUrl = "https://api.hubapi.com/contacts/v1/lists/dynamic?hapikey=demo";
     }
 }
