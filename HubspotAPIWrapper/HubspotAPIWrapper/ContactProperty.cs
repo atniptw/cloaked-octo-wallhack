@@ -3,46 +3,67 @@ using System.Json;
 
 namespace HubspotAPIWrapper
 {
-    internal class ContactProperty : BaseClass
+    public class ContactProperty : BaseClass
     {
+
+        private const string ContactListsApiVersion = "v1";
+
+        public ContactProperty(string apiKey = null, string accessToken = null, string refreshToken = null,
+                                string clientId = null)
+            : base(apiKey, accessToken, refreshToken, clientId)
+        {
+        }
+
+        protected override string GetPath(string method)
+        {
+            return string.Format("contacts/{0}/{1}", ContactListsApiVersion, method);
+        }
+
         public JsonObject GetAllProperties()
         {
-            throw new NotImplementedException();
+            return Call(subpath: "properties");
         }
 
-        public JsonObject CreateANewPropery()
+        public JsonObject CreateNewCustomProperty(string property, string data)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("properties/{0}", property);
+            return Call(subpath: subpath, method: "PUT", contentType: " application/json", data: data);
         }
 
-        public JsonObject UpdateANewPropery()
+        public JsonObject UpdateExistingProperty(string property, string data)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("properties/{0}", property);
+            return Call(subpath: subpath, method: "POST", contentType: " application/json", data: data);
         }
 
-        public JsonObject DeleteAProperty()
+        public JsonObject DeleteProperty(string property)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("properties/{0}", property);
+            return Call(subpath: subpath, method: "DELETE");
         }
 
-        public JsonObject GetAPropertyGroup()
+        public JsonObject GetContactPropertyGroup(string groupName = "")
         {
-            throw new NotImplementedException();
+            string subpath = groupName.Length > 0 ? string.Format("groups/{0}", groupName) : "groups";
+            return Call(subpath: subpath);
         }
 
-        public JsonObject CreateAPropertyGroup()
+        public JsonObject CreateContactPropertyGroup(string groupName, string properties = "")
         {
-            throw new NotImplementedException();
+            string subpath = string.Format("groups/{0}", groupName);
+            return Call(subpath: subpath, method: "PUT", data: properties, contentType: "application/json");
         }
 
-        public JsonObject UpdateAPropertyGroup()
+        public JsonObject UpdateContactPropertyGroup(string groupName, string properties = "")
         {
-            throw new NotImplementedException();
+            string subpath = string.Format("groups/{0}", groupName);
+            return Call(subpath: subpath, method: "POST", data: properties, contentType: "application/json");
         }
 
-        public JsonObject DeleteAPropertyGroup()
+        public JsonObject DeleteContactPropertyGroup(string groupName)
         {
-            throw new NotImplementedException();
+            string subpath = string.Format("groups/{0}", groupName);
+            return Call(subpath: subpath, method: "DELETE");
         }
     }
 }

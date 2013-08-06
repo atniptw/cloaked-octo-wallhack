@@ -83,5 +83,13 @@
 
         public static string AddExistingContactToListUrl = "https://api.hubapi.com/contacts/v1/lists/2/add?hapikey=demo";
         public static string RemoveExistingContactFromListUrl = "https://api.hubapi.com/contacts/v1/lists/2/remove?hapikey=demo";
+        public static string GetAllPropertiesUrl = "https://api.hubapi.com/contacts/v1/properties?hapikey=demo";
+        public static string CreateNewCustomPropertyUrl = "https://api.hubapi.com/contacts/v1/properties/newcustomproperty?hapikey=demo";
+        public static string UpdateExistingPropertyUrl = "https://api.hubapi.com/contacts/v1/properties/originalprop?hapikey=demo";
+        public static string DeletePropertydUrl = "https://api.hubapi.com/contacts/v1/properties/originalprop?hapikey=demo";
+        public static string GetContactPropertyGroupUrl = "https://api.hubapi.com/contacts/v1/groups/contactinformation?hapikey=demo";
+        public static string CreateContactPropertyGroupUrl = "https://api.hubapi.com/contacts/v1/groups/anothercustom?hapikey=demo";
+        public static string UpdateContactPropertyGroupUrl = "https://api.hubapi.com/contacts/v1/groups/anothercustom?hapikey=demo";
+        public static string DeleteContactPropertyGroupUrl = "https://api.hubapi.com/contacts/v1/groups/anothercustom?hapikey=demo";
     }
 }
