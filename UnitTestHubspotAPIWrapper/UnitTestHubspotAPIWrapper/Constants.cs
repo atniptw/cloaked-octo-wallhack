@@ -63,8 +63,25 @@
         public static string DeleteContactListUrl = "https://api.hubapi.com/contacts/v1/lists/2?hapikey=demo";
         public static string GetContactListByIdtUrl = "https://api.hubapi.com/contacts/v1/lists/2?hapikey=demo";
         public static string GetContactListstUrl = "https://api.hubapi.com/contacts/v1/lists?hapikey=demo";
-        public static string GetBatchContactListstUrl = "https://api.hubapi.com/contacts/v1/lists/batch?hapikey=demo&listId=2&listId=3&listId=4&listId=5&";
+
+        public static string GetBatchContactListstUrl =
+            "https://api.hubapi.com/contacts/v1/lists/batch?hapikey=demo&listId=2&listId=3&listId=4&listId=5&";
+
         public static string GetStaticContactListstUrl = "https://api.hubapi.com/contacts/v1/lists/static?hapikey=demo";
-        public static string GetDynamicContactListstUrl = "https://api.hubapi.com/contacts/v1/lists/dynamic?hapikey=demo";
+
+        public static string GetDynamicContactListstUrl =
+            "https://api.hubapi.com/contacts/v1/lists/dynamic?hapikey=demo";
+
+        public static string GetContactsInListstUrl =
+            "https://api.hubapi.com/contacts/v1/lists/1/contacts/all?hapikey=demo";
+
+        public static string GetRecentlyAddedContactsInListstUrl =
+            "https://api.hubapi.com/contacts/v1/lists/1/contacts/recent?hapikey=demo";
+
+        public static string RefreshExistingContactListtUrl =
+            "https://api.hubapi.com/contacts/v1/lists/2/refresh?hapikey=demo";
+
+        public static string AddExistingContactToListUrl = "https://api.hubapi.com/contacts/v1/lists/2/add?hapikey=demo";
+        public static string RemoveExistingContactFromListUrl = "https://api.hubapi.com/contacts/v1/lists/2/remove?hapikey=demo";
     }
 }

@@ -355,5 +355,160 @@ namespace UnitTestHubspotAPIWrapper
                 contentType: Arg<string>.Is.Anything,
                 data: Arg<string>.Is.Anything));
         }
+
+        [Test]
+        public void ContactsListsGetContactsInListListsUrlFormedCorrectly()
+        {
+            var mockDataSource = MockRepository.GenerateMock<IWebClient>();
+            var expectedUrl = Constants.GetContactsInListstUrl;
+
+            // Arrange
+            mockDataSource
+                .Stub(x => x.UploadString(
+                    Arg<string>.Is.Anything, // uri
+                    Arg<string>.Is.Anything, // method
+                    Arg<string>.Is.Anything, // content-type
+                    Arg<string>.Is.Anything  // data
+                               ))
+                .Return(string.Empty);
+
+            // Act
+            var target = new ContactLists(apiKey: Constants.ApiKey)
+            {
+                UserWebClient = mockDataSource
+            };
+            target.GetContactsInList("1");
+
+            // Assert
+            mockDataSource.AssertWasCalled(c => c.UploadString(
+                uri: Arg<string>.Matches(actualUrl => actualUrl == expectedUrl),
+                method: Arg<string>.Is.Anything,
+                contentType: Arg<string>.Is.Anything,
+                data: Arg<string>.Is.Anything));
+        }
+
+        [Test]
+        public void ContactsListsGetRecentlyAddedContactsInListListsUrlFormedCorrectly()
+        {
+            var mockDataSource = MockRepository.GenerateMock<IWebClient>();
+            var expectedUrl = Constants.GetRecentlyAddedContactsInListstUrl;
+
+            // Arrange
+            mockDataSource
+                .Stub(x => x.UploadString(
+                    Arg<string>.Is.Anything, // uri
+                    Arg<string>.Is.Anything, // method
+                    Arg<string>.Is.Anything, // content-type
+                    Arg<string>.Is.Anything  // data
+                               ))
+                .Return(string.Empty);
+
+            // Act
+            var target = new ContactLists(apiKey: Constants.ApiKey)
+            {
+                UserWebClient = mockDataSource
+            };
+            target.GetRecentlyAddedContactsInList("1");
+
+            // Assert
+            mockDataSource.AssertWasCalled(c => c.UploadString(
+                uri: Arg<string>.Matches(actualUrl => actualUrl == expectedUrl),
+                method: Arg<string>.Is.Anything,
+                contentType: Arg<string>.Is.Anything,
+                data: Arg<string>.Is.Anything));
+        }
+
+        [Test]
+        public void ContactsListsRefreshExistingConactListUrlFormedCorrectly()
+        {
+            var mockDataSource = MockRepository.GenerateMock<IWebClient>();
+            var expectedUrl = Constants.RefreshExistingContactListtUrl;
+
+            // Arrange
+            mockDataSource
+                .Stub(x => x.UploadString(
+                    Arg<string>.Is.Anything, // uri
+                    Arg<string>.Is.Anything, // method
+                    Arg<string>.Is.Anything, // content-type
+                    Arg<string>.Is.Anything  // data
+                               ))
+                .Return(string.Empty);
+
+            // Act
+            var target = new ContactLists(apiKey: Constants.ApiKey)
+            {
+                UserWebClient = mockDataSource
+            };
+            target.RefreshExistingContactList("2");
+
+            // Assert
+            mockDataSource.AssertWasCalled(c => c.UploadString(
+                uri: Arg<string>.Matches(actualUrl => actualUrl == expectedUrl),
+                method: Arg<string>.Is.Anything,
+                contentType: Arg<string>.Is.Anything,
+                data: Arg<string>.Is.Anything));
+        }
+
+        [Test]
+        public void ContactsListsAddExistingContactToListUrlFormedCorrectly()
+        {
+            var mockDataSource = MockRepository.GenerateMock<IWebClient>();
+            var expectedUrl = Constants.AddExistingContactToListUrl;
+
+            // Arrange
+            mockDataSource
+                .Stub(x => x.UploadString(
+                    Arg<string>.Is.Anything, // uri
+                    Arg<string>.Is.Anything, // method
+                    Arg<string>.Is.Anything, // content-type
+                    Arg<string>.Is.Anything  // data
+                               ))
+                .Return(string.Empty);
+
+            // Act
+            var target = new ContactLists(apiKey: Constants.ApiKey)
+            {
+                UserWebClient = mockDataSource
+            };
+            target.AddExistingContactToList("2", "");
+
+            // Assert
+            mockDataSource.AssertWasCalled(c => c.UploadString(
+                uri: Arg<string>.Matches(actualUrl => actualUrl == expectedUrl),
+                method: Arg<string>.Is.Anything,
+                contentType: Arg<string>.Is.Anything,
+                data: Arg<string>.Is.Anything));
+        }
+
+        [Test]
+        public void ContactsListsRemoveExistingContactFromListUrlFormedCorrectly()
+        {
+            var mockDataSource = MockRepository.GenerateMock<IWebClient>();
+            var expectedUrl = Constants.RemoveExistingContactFromListUrl;
+
+            // Arrange
+            mockDataSource
+                .Stub(x => x.UploadString(
+                    Arg<string>.Is.Anything, // uri
+                    Arg<string>.Is.Anything, // method
+                    Arg<string>.Is.Anything, // content-type
+                    Arg<string>.Is.Anything  // data
+                               ))
+                .Return(string.Empty);
+
+            // Act
+            var target = new ContactLists(apiKey: Constants.ApiKey)
+            {
+                UserWebClient = mockDataSource
+            };
+            target.RemoveExistingContactFromList("2", "");
+
+            // Assert
+            mockDataSource.AssertWasCalled(c => c.UploadString(
+                uri: Arg<string>.Matches(actualUrl => actualUrl == expectedUrl),
+                method: Arg<string>.Is.Anything,
+                contentType: Arg<string>.Is.Anything,
+                data: Arg<string>.Is.Anything));
+        }
     }
 }

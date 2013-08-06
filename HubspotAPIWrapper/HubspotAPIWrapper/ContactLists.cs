@@ -91,29 +91,64 @@ namespace HubspotAPIWrapper
             return Call(subpath: "lists/dynamic", optionalParams: optionalParams);
         }
 
-        public JsonObject GetContactsInAList()
+        public JsonObject GetContactsInList(string listId, string count = "", string offset = "", string property = "")
         {
-            throw new NotImplementedException();
+            var optionalParams = new Dictionary<string, string>();
+            if (count.Length > 0)
+            {
+                optionalParams["count"] = count;
+            }
+            if (offset.Length > 0)
+            {
+                optionalParams["vidOffset"] = offset;
+            }
+            if (property.Length > 0)
+            {
+                optionalParams["propery"] = property;
+            }
+            var subpath = string.Format("lists/{0}/contacts/all", listId);
+            return Call(subpath: subpath, optionalParams: optionalParams);
         }
 
-        public JsonObject GetRecentlyAddedContactsInAList()
+        public JsonObject GetRecentlyAddedContactsInList(string listId, string count = "", string timeOffset = "", string contactOffset = "", string property = "")
         {
-            throw new NotImplementedException();
+            var optionalParams = new Dictionary<string, string>();
+            if (count.Length > 0)
+            {
+                optionalParams["count"] = count;
+            }
+            if (contactOffset.Length > 0)
+            {
+                optionalParams["vidOffset"] = contactOffset;
+            }
+            if (timeOffset.Length > 0)
+            {
+                optionalParams["timeOffset"] = timeOffset;
+            }
+            if (property.Length > 0)
+            {
+                optionalParams["propery"] = property;
+            }
+            var subpath = string.Format("lists/{0}/contacts/recent", listId);
+            return Call(subpath: subpath, optionalParams: optionalParams);
         }
 
-        public JsonObject RefreshAContactList()
+        public void RefreshExistingContactList(string listId)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("lists/{0}/refresh", listId);
+            Call(subpath: subpath, method:"POST");
         }
 
-        public JsonObject AddContactToList()
+        public JsonObject AddExistingContactToList(string listId, string data)
         {
-            throw new NotImplementedException();
+            var subPath = string.Format("lists/{0}/add", listId);
+            return Call(subpath: subPath, method: "POST", contentType: "application/json", data: data);   
         }
 
-        public JsonObject RemoveContactFromList()
+        public JsonObject RemoveExistingContactFromList(string listId, string data)
         {
-            throw new NotImplementedException();
+            var subPath = string.Format("lists/{0}/remove", listId);
+            return Call(subpath: subPath, method: "POST", contentType: "application/json", data: data);   
         }
     }
 }
