@@ -7,46 +7,62 @@ using System.Json;
 
 namespace HubspotAPIWrapper
 {
-    class Forms : BaseClass
+    public class Forms : BaseClass
     {
+                private const string ProspectsApiVersion = "v1";
+
+        public Forms(string apiKey = null, string accessToken = null, string refreshToken = null,
+                         string clientId = null) : base(apiKey, accessToken, refreshToken, clientId)
+        {
+        }
+
+        protected override string GetPath(string method)
+        {
+            return string.Format("contacts/{0}/{1}", ProspectsApiVersion, method);
+        }
         public JsonObject SubmitFormData()
         {
             throw new NotImplementedException();
         }
 
-        public JsonObject GetForms()
+        public JsonObject GetAllForms()
         {
-            throw new NotImplementedException();
+            return Call(subpath: "forms");
         }
 
-        public JsonObject GetForm()
+        public JsonObject GetFormById(string formGuId)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("forms/{0}", formGuId);
+            return Call(subpath: subpath);
         }
 
-        public JsonObject CreateAForm()
+        public JsonObject CreateForm(string data)
         {
-            throw new NotImplementedException();
+            return Call(subpath: "forms", method: "POST", contentType: "application/json", data: data);
         }
 
-        public JsonObject UpdateAForm()
+        public JsonObject UpdateExistingForm(string formGuId, string data)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("forms/{0}", formGuId);
+            return Call(subpath: subpath, method: "POST", contentType: "application/json", data: data);
         }
 
-        public JsonObject DeleteAForm()
+        public JsonObject DeleteExistingForm(string formGuId)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("forms/{0}", formGuId);
+            return Call(subpath: subpath, method: "DELETE");
         }
 
-        public JsonObject GetFormFields()
+        public JsonObject GetAllFieldsFromForm(string formGuId)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("fields/{0}", formGuId);
+            return Call(subpath: subpath);
         }
 
-        public JsonObject GetAFormField()
+        public JsonObject GetFieldFromForm(string formGuId, string fieldName)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("fields/{0}/{1}", formGuId, fieldName);
+            return Call(subpath: subpath);
         }
     }
 }

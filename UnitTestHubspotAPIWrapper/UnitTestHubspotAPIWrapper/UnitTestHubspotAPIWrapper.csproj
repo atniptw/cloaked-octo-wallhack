@@ -79,6 +79,7 @@
     <Compile Include="ContactsTest.cs" />
     <Compile Include="ContactListsTest.cs" />
     <Compile Include="ContactPropertyUnitTest.cs" />
+    <Compile Include="FormsTest.cs" />
     <Compile Include="WorkFlowsTest.cs" />
   </ItemGroup>
   <ItemGroup>
