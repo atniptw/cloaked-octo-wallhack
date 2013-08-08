@@ -91,5 +91,11 @@
         public static string CreateContactPropertyGroupUrl = "https://api.hubapi.com/contacts/v1/groups/anothercustom?hapikey=demo";
         public static string UpdateContactPropertyGroupUrl = "https://api.hubapi.com/contacts/v1/groups/anothercustom?hapikey=demo";
         public static string DeleteContactPropertyGroupUrl = "https://api.hubapi.com/contacts/v1/groups/anothercustom?hapikey=demo";
+        public static string GetAllWorkflowsUrl = "https://api.hubapi.com/automation/v2/workflows?hapikey=demo";
+        public static string GetWorkflowByIdUrl = "https://api.hubapi.com/automation/v2/workflows/8993?hapikey=demo";
+        public static string EnrollContactIntoWorkflowUrl = "https://api.hubapi.com/automation/v2/workflows/8993/enrollments/contacts/sample@hubspot.com?hapikey=demo";
+        public static string RemoveContactFromWorkflowUrl = "https://api.hubapi.com/automation/v2/workflows/8993/enrollments/contacts/sample@hubspot.com?hapikey=demo";
+        public static string GetCurrentEnrollmentUrl = "https://api.hubapi.com/automation/v2/workflows/8993/enrollments/contacts/1234?hapikey=demo";
+        
     }
 }

@@ -3,29 +3,46 @@ using System.Json;
 
 namespace HubspotAPIWrapper
 {
-    internal class Workflows : BaseClass
+    public class Workflows : BaseClass
     {
+
+        private const string ProspectsApiVersion = "v2";
+
+        public Workflows(string apiKey = null, string accessToken = null, string refreshToken = null,
+                         string clientId = null)
+            : base(apiKey, accessToken, refreshToken, clientId)
+        {
+        }
+
+        protected override string GetPath(string method)
+        {
+            return string.Format("automation/{0}/{1}", ProspectsApiVersion, method);
+        }
+
         public JsonObject GetAllWorkFlows()
         {
-            throw new NotImplementedException();
+            return Call(subpath: "workflows");
         }
 
-        public JsonObject GetAspecificWorkflow()
+        public JsonObject GetWorkflowById(string workflowId)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("workflows/{0}", workflowId);
+            return Call(subpath: subpath);
         }
 
-        public JsonObject EnrollAContactIntoAWorkflow()
+        public JsonObject EnrollContactIntoWorkflow(string workflowId, string contactEmail)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("workflows/{0}/enrollments/contacts/{1}", workflowId, contactEmail);
+            return Call(subpath: subpath, method: "POST");
         }
 
-        public JsonObject UnenrollAContactFromAWorkflow()
+        public JsonObject RemoveContactFromWorkflow(string workflowId, string contactEmail)
         {
-            throw new NotImplementedException();
+            var subpath = string.Format("workflows/{0}/enrollments/contacts/{1}", workflowId, contactEmail);
+            return Call(subpath: subpath, method: "DELETE");
         }
 
-        public JsonObject CurrentEnrollments()
+        public JsonObject GetCurrentEnrollment()
         {
             throw new NotImplementedException();
         }
