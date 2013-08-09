@@ -80,6 +80,7 @@
     <Compile Include="ContactListsTest.cs" />
     <Compile Include="ContactPropertyUnitTest.cs" />
     <Compile Include="FormsTest.cs" />
+    <Compile Include="EmailTest.cs" />
     <Compile Include="WorkFlowsTest.cs" />
   </ItemGroup>
   <ItemGroup>

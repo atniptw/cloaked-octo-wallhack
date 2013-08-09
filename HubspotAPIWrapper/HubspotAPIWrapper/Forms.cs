@@ -9,7 +9,7 @@ namespace HubspotAPIWrapper
 {
     public class Forms : BaseClass
     {
-                private const string ProspectsApiVersion = "v1";
+        private const string ProspectsApiVersion = "v1";
 
         public Forms(string apiKey = null, string accessToken = null, string refreshToken = null,
                          string clientId = null) : base(apiKey, accessToken, refreshToken, clientId)
@@ -20,6 +20,7 @@ namespace HubspotAPIWrapper
         {
             return string.Format("contacts/{0}/{1}", ProspectsApiVersion, method);
         }
+
         public JsonObject SubmitFormData()
         {
             throw new NotImplementedException();

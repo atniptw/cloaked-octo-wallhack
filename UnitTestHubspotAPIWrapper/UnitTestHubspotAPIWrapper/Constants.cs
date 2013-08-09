@@ -103,5 +103,6 @@
         public static string DeleteExistingFormUrl = "https://api.hubapi.com/contacts/v1/forms/b409d881-7bc3-4d8b-ad7a-cebe188f27b0?hapikey=demo";
         public static string GetAllFieldsFromFormUrl = "https://api.hubapi.com/contacts/v1/fields/78c2891f-ebdd-44c0-bd94-15c012bbbfbf?hapikey=demo";
         public static string GetFieldFromFormUrl = "https://api.hubapi.com/contacts/v1/fields/561d9ce9-bb4c-45b4-8e32-21cdeaa3a7f0/email?hapikey=demo";
+        public static string GetEmailSubscriptionTypesUrl = "http://api.hubapi.com/email/v1/public/subscriptions?hapikey=demo";
     }
 }
