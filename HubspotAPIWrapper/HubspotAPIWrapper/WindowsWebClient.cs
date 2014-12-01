@@ -17,6 +17,7 @@ namespace HubspotAPIWrapper
             {
                 var writer = new StreamWriter(request.GetRequestStream());
                 writer.Write(data);
+                writer.Close();
             }
 
 
